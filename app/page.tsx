@@ -32,8 +32,8 @@ export default function Home() {
         <AboutPage />
         <Stats />
         <BusinessPage />
-        {/* <ProductsPage /> */}
         <CasesPage />
+        <ProductsPage />
         <WikiPage />
         <ContactPage />
       </main>
