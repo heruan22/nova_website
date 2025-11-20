@@ -33,7 +33,7 @@ export default function Home() {
         <Stats />
         <BusinessPage />
         <CasesPage />
-        <ProductsPage />
+        {/* <ProductsPage /> */}
         <WikiPage />
         <ContactPage />
       </main>
