@@ -9,25 +9,25 @@ export default function AboutPage() {
     {
       icon: '🌍',
       title: '全球布局',
-      description: '服务网络遍布六大洲，150+个国家和地区',
+      description: '服务覆盖全球200+港口，全球运输无忧',
       color: 'from-blue-500 to-cyan-500'
     },
     {
       icon: '🚀',
-      title: '科技驱动',
-      description: 'AI智能调度系统，实时货物追踪',
+      title: '智慧物流',
+      description: '数据赋能，为您提供全程可视、安心可靠的物流体验',
       color: 'from-purple-500 to-pink-500'
     },
     {
       icon: '🏆',
       title: '行业领先',
-      description: '20+年行业经验，服务10000+企业客户',
+      description: '18年行业经验，年出货量超50万计费吨',
       color: 'from-orange-500 to-red-500'
     },
     {
       icon: '💼',
       title: '专业团队',
-      description: '500+资深物流专家，7x24小时在线服务',
+      description: '资深业务团队，7x24小时在线服务',
       color: 'from-green-500 to-teal-500'
     }
   ];
@@ -38,13 +38,9 @@ export default function AboutPage() {
       label: '企业愿景',
       icon: '🎯',
       content: {
-        title: '成为全球最值得信赖的物流服务商',
+        title: '成为中国领先的国际物流综合服务供应商',
         description: '我们致力于通过创新的物流解决方案，为全球客户创造价值。以客户需求为导向，以科技创新为驱动，构建高效、安全、可持续的全球物流网络。',
-        highlights: [
-          '打造智慧物流生态系统',
-          '引领行业数字化转型',
-          '实现绿色可持续发展'
-        ]
+        highlights: []
       }
     },
     {
@@ -53,12 +49,8 @@ export default function AboutPage() {
       icon: '⚡',
       content: {
         title: '连接世界，畅通无阻',
-        description: '通过整合全球优质物流资源，为客户提供端到端的供应链解决方案。我们不仅是货物的运输者，更是企业全球化发展的战略合作伙伴。',
-        highlights: [
-          '提供一站式物流服务',
-          '优化供应链成本',
-          '提升客户竞争优势'
-        ]
+        description: '通过整合全球优质物流资源，为客户提供专业与优质的国际物流解决方案。我们不仅是货物的运输者，更是企业全球化发展的战略合作伙伴。',
+        highlights: []
       }
     },
     {
@@ -68,11 +60,7 @@ export default function AboutPage() {
       content: {
         title: '诚信、专业、创新、共赢',
         description: '诚信是我们的立身之本，专业是我们的服务标准，创新是我们的发展动力，共赢是我们的合作理念。与客户、合作伙伴共同成长，创造更大价值。',
-        highlights: [
-          '客户至上，信誉第一',
-          '精益求精，追求卓越',
-          '开放合作，互利共赢'
-        ]
+        highlights: []
       }
     }
   ];
@@ -85,11 +73,11 @@ export default function AboutPage() {
         {/* 标题区域 */}
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-gray-900 mb-4">
-            关于华顺船务
+            关于我们
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-cyan-600 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            专注国际物流18年，为全球客户提供专业、高效、可靠的一站式物流解决方案
+            公司于2008年成立于天津，专注国际物流18年
           </p>
         </div>
 
@@ -142,21 +130,23 @@ export default function AboutPage() {
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                 {currentTab?.content.description}
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {currentTab?.content.highlights.map((highlight, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-start space-x-3 bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-lg"
-                  >
-                    <div className="flex-shrink-0">
-                      <div className="w-6 h-6 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center">
-                        <span className="text-white text-xs font-bold">✓</span>
+              {(currentTab?.content.highlights?.length ?? 0) > 0 && (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {currentTab?.content.highlights.map((highlight, index) => (
+                    <div
+                      key={index}
+                      className="flex items-start space-x-3 bg-gradient-to-br from-blue-50 to-cyan-50 p-4 rounded-lg"
+                    >
+                      <div className="flex-shrink-0">
+                        <div className="w-6 h-6 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center">
+                          <span className="text-white text-xs font-bold">✓</span>
+                        </div>
                       </div>
+                      <p className="text-gray-700 font-medium">{highlight}</p>
                     </div>
-                    <p className="text-gray-700 font-medium">{highlight}</p>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>

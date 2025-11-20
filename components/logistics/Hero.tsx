@@ -1,6 +1,9 @@
 'use client';
 
+import { useContact } from '@/components/ContactContext';
+
 export default function Hero() {
+  const { openChat } = useContact();
   return (
     <section className="relative h-screen w-full overflow-hidden bg-gradient-to-r from-blue-900 to-blue-800">
       {/* Background image */}
@@ -16,18 +19,24 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
         <h1 className="text-5xl font-bold md:text-7xl mb-6">
-          全球物流解决方案专家
+          全球物流解决方案
         </h1>
         <p className="text-xl md:text-2xl mb-8 max-w-2xl">
-          致力于为全球客户提供专业化、个性化、一站式的全球物流运输解决方案
+          致力于持续为全球客户提供专业化、个性化、全面化的全球物流运输解决方案
         </p>
         <div className="flex gap-4 flex-wrap justify-center">
-          <button className="bg-blue-500 hover:bg-blue-600 px-8 py-3 rounded-lg font-semibold transition">
+          <button
+            onClick={() => openChat()}
+            className="bg-blue-500 hover:bg-blue-600 px-8 py-3 rounded-lg font-semibold transition"
+          >
             立即咨询
           </button>
-          <button className="border-2 border-white hover:bg-white hover:text-blue-900 px-8 py-3 rounded-lg font-semibold transition">
+          <a
+            href="#business"
+            className="border-2 border-white hover:bg-white hover:text-blue-900 px-8 py-3 rounded-lg font-semibold transition"
+          >
             了解服务
-          </button>
+          </a>
         </div>
       </div>
     </section>

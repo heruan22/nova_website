@@ -4,10 +4,9 @@ import React, { useState } from "react";
 import { useContact } from "./ContactContext";
 
 const PHONE_NUMBER = "15900736092";
-const PHONE_DISPLAY = "(15900736092)";
-const AUTO_REPLY = `感谢您的咨询，请提供您的联系方式，我们的客服将在工作时间内尽快联系您。
-
-您也可直接联系我们的业务人员：${PHONE_DISPLAY}`;
+const PHONE_DISPLAY = "席经理: 15900736092";
+const AUTO_REPLY = `感谢您的咨询，请提供您的联系方式，我们的客服将在工作时间内尽快联系您。您也可直接联系我们的业务人员：
+${PHONE_DISPLAY}`;
 
 export default function LiveChat() {
   const { isChatOpen, openChat, closeChat } = useContact();
@@ -46,7 +45,7 @@ export default function LiveChat() {
             ) : (
               messages.map((m, i) => (
                 <div key={i} className={`mb-2 flex ${m.from === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`${m.from === 'user' ? 'bg-blue-600 text-white' : 'bg-white text-gray-800 border'} p-2 rounded-lg max-w-[80%]`}>
+                  <div className={`${m.from === 'user' ? 'bg-blue-600 text-white' : 'bg-white text-gray-800 border'} p-2 rounded-lg max-w-[80%] whitespace-pre-line`}>
                     {m.text}
                   </div>
                 </div>

@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useContact } from '@/components/ContactContext';
 
 export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolean; setIsMenuOpen: (value: boolean) => void }) {
   const [hasScrolled, setHasScrolled] = useState(false);
+  const { openChat } = useContact();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,12 +67,15 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
           {/* Desktop Actions */}
           <div className="hidden items-center space-x-4 md:flex">
-            <button className={`px-6 py-2 rounded-lg font-medium transition ${
+            <button
+              onClick={() => openChat()}
+              className={`px-6 py-2 rounded-lg font-medium transition ${
               hasScrolled
                 ? 'bg-blue-600 text-white hover:bg-blue-700'
                 : 'bg-white text-blue-600 hover:bg-gray-100'
-            }`}>
-              在线咨询
+            }`}
+            >
+              联系我们
             </button>
           </div>
 

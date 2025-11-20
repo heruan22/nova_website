@@ -60,13 +60,12 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-700 font-semibold mb-2">邮箱 *</label>
+                    <label className="block text-gray-700 font-semibold mb-2">邮箱</label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      required
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600"
                       placeholder="请输入您的邮箱"
                     />
@@ -109,11 +108,11 @@ export default function ContactPage() {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600"
                   >
                     <option value="">请选择咨询主题</option>
-                    <option value="shipping">海运咨询</option>
-                    <option value="airfreight">空运咨询</option>
-                    <option value="landtransport">陆运咨询</option>
-                    <option value="customs">报关清关</option>
-                    <option value="hazmat">危险品运输</option>
+                    <option value="shipping">散杂货咨询</option>
+                    <option value="airfreight">集装箱咨询</option>
+                    <option value="landtransport">滚装船咨询</option>
+                    <option value="customs">大宗散运咨询</option>
+                    <option value="hazmat">港口地面咨询</option>
                     <option value="other">其他咨询</option>
                   </select>
                 </div>
@@ -146,7 +145,7 @@ export default function ContactPage() {
               <div className="mb-6">
                 <p className="text-blue-100 text-sm tracking-wide uppercase">天津总部客服</p>
                 <h3 className="text-2xl font-bold mt-2">专属对接团队</h3>
-                <p className="text-blue-100 mt-2 text-sm">一对一服务 · 实时响应</p>
+                <p className="text-blue-100 mt-2 text-sm">为您服务</p>
               </div>
 
               <div className="space-y-5 flex-1">
@@ -154,7 +153,7 @@ export default function ContactPage() {
                   <span className="text-2xl">📞</span>
                   <div>
                     <p className="text-blue-100 text-sm mb-1">客服电话</p>
-                    <p className="text-white text-xl font-semibold">+86 159 0073 6092</p>
+                    <p className="text-white text-xl font-semibold">15900736092</p>
                     <p className="text-blue-100 text-xs">周一至周五 08:30-17:30</p>
                   </div>
                 </div>
@@ -182,13 +181,13 @@ export default function ContactPage() {
                   <span className="text-2xl">🤝</span>
                   <div>
                     <p className="text-blue-100 text-sm mb-1">服务范围</p>
-                    <p className="text-white">定制物流方案 / 运价咨询 / 报关报检 / 危险品运输</p>
+                    <p className="text-white">定制物流方案 / 船期咨询 / 运价咨询</p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-6 pt-6 border-t border-white/20 text-sm text-blue-100">
-                欢迎预约现场拜访或视频会议，我们将根据您的业务需求提供最优解法。
+                欢迎预约现场拜访或视频会议，我们将根据您的业务需求提供最优解决方案。
               </div>
             </div>
           </div>
