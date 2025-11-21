@@ -67,6 +67,16 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
 
           {/* Desktop Actions */}
           <div className="hidden items-center space-x-4 md:flex">
+            <a
+              href="/login"
+              className={`px-6 py-2 rounded-lg font-medium transition ${
+                hasScrolled
+                  ? 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50'
+                  : 'border-2 border-white text-white hover:bg-white/10'
+              }`}
+            >
+              登录
+            </a>
             <button
               onClick={() => openChat()}
               className={`px-6 py-2 rounded-lg font-medium transition ${
