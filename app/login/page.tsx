@@ -118,9 +118,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-gray-600">
-            <p>测试账号：admin / password</p>
-          </div>
+          <div className="mt-6 text-center text-sm text-gray-600" />
         </div>
 
         {/* 返回首页 */}

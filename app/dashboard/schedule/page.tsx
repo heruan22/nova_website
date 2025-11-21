@@ -29,48 +29,48 @@ export default function SchedulePage() {
       vesselName: 'NOVA STAR',
       voyage: 'NS2025-11',
       portFrom: '天津新港',
-      portTo: '新加坡',
-      etd: '2025-11-25',
+      portTo: '海防',
+      etd: '2025-11-28',
       eta: '2025-12-05',
-      capacity: 15000,
-      booked: 12500,
-      status: '订舱中',
+      capacity: 35000,
+      booked: 33000,
+      status: '舱位紧张',
     },
     {
       id: 2,
       vesselName: 'OCEAN PIONEER',
       voyage: 'OP2025-08',
-      portFrom: '上海港',
-      portTo: '洛杉矶',
-      etd: '2025-11-28',
-      eta: '2025-12-15',
-      capacity: 22000,
-      booked: 18000,
-      status: '订舱中',
+      portFrom: '天津港',
+      portTo: '杰贝阿里',
+      etd: '2025-12-10',
+      eta: '2026-01-15',
+      capacity: 55000,
+      booked: 35000,
+      status: '收货中',
     },
     {
       id: 3,
       vesselName: 'SEA DRAGON',
       voyage: 'SD2025-15',
-      portFrom: '宁波港',
-      portTo: '汉堡',
-      etd: '2025-11-22',
-      eta: '2025-12-20',
-      capacity: 18000,
-      booked: 17200,
-      status: '即将截关',
+      portFrom: '天津港',
+      portTo: '德班',
+      etd: '2025-12-15',
+      eta: '2026-01-25',
+      capacity: 60000,
+      booked: 45000,
+      status: '收货中',
     },
     {
       id: 4,
       vesselName: 'GLOBAL CARRIER',
       voyage: 'GC2025-12',
-      portFrom: '青岛港',
-      portTo: '迪拜',
-      etd: '2025-11-30',
-      eta: '2025-12-10',
-      capacity: 12000,
-      booked: 8500,
-      status: '订舱中',
+      portFrom: '天津港',
+      portTo: '卡亚俄',
+      etd: '2025-12-30',
+      eta: '2026-02-10',
+      capacity: 50000,
+      booked: 15000,
+      status: '收货中',
     },
   ];
 
@@ -104,7 +104,7 @@ export default function SchedulePage() {
         {[
           { label: '活跃航线', value: '24', icon: '🌐' },
           { label: '本月航次', value: '86', icon: '🚢' },
-          { label: '舱位利用率', value: '78%', icon: '📊' },
+          { label: '揽货进度', value: '78%', icon: '📊' },
           { label: '即将开航', value: '12', icon: '⏱️' },
         ].map((stat, i) => (
           <div key={i} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
@@ -173,8 +173,8 @@ export default function SchedulePage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                        schedule.status === '订舱中' ? 'bg-green-100 text-green-700' :
-                        schedule.status === '即将截关' ? 'bg-yellow-100 text-yellow-700' :
+                        schedule.status === '收货中' ? 'bg-green-100 text-green-700' :
+                        schedule.status === '舱位紧张' ? 'bg-yellow-100 text-yellow-700' :
                         'bg-gray-100 text-gray-700'
                       }`}>
                         {schedule.status}
