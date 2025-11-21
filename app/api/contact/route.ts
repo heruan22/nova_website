@@ -38,7 +38,7 @@ export async function POST(req: Request) {
 ${message}
 
 ---
-此邮件由华顺物流网站自动生成
+此邮件由华顺船务网站自动生成
     `.trim();
 
     // 发送邮件到管理员邮箱
@@ -58,7 +58,7 @@ ${message}
           <tr><td style="padding: 8px; border: 1px solid #ddd;"><strong>咨询内容：</strong></td><td style="padding: 8px; border: 1px solid #ddd;"><pre>${message}</pre></td></tr>
         </table>
         <hr />
-        <p>此邮件由华顺物流网站自动生成</p>
+        <p>此邮件由华顺船务网站自动生成</p>
       `,
     });
 

@@ -12,15 +12,34 @@ export default function LiveChat() {
   const { isChatOpen, openChat, closeChat } = useContact();
   const [messages, setMessages] = useState<{ from: 'user' | 'bot'; text: string }[]>([]);
   const [input, setInput] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
-  const send = () => {
-    if (!input.trim()) return;
+  const send = async () => {
+    if (!input.trim() || isSending) return;
     const text = input.trim();
     setMessages(prev => [...prev, { from: 'user', text }]);
     setInput("");
-    setTimeout(() => {
-      setMessages(prev => [...prev, { from: 'bot', text: AUTO_REPLY }]);
-    }, 600);
+    setIsSending(true);
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data?.error || "消息发送失败，请稍后再试。");
+      }
+
+      setMessages(prev => [...prev, { from: 'bot', text: data?.message || AUTO_REPLY }]);
+    } catch (error: any) {
+      setMessages(prev => [...prev, { from: 'bot', text: error?.message || "消息发送失败，请稍后再试。" }]);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -56,7 +75,9 @@ export default function LiveChat() {
           <div className="p-3 border-t">
             <div className="flex gap-2">
               <input value={input} onChange={e => setInput(e.target.value)} className="flex-1 p-2 border rounded" placeholder="请输入消息" />
-              <button onClick={send} className="bg-blue-600 text-white px-3 rounded">发送</button>
+              <button onClick={send} disabled={isSending} className="bg-blue-600 text-white px-3 rounded disabled:bg-blue-300 disabled:cursor-not-allowed">
+                {isSending ? "发送中" : "发送"}
+              </button>
             </div>
           </div>
         </div>

@@ -30,8 +30,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const menuItems = [
     { id: 'business', name: '业务看板', icon: '📊', href: '/dashboard' },
     { id: 'schedule', name: '船期看板', icon: '🚢', href: '/dashboard/schedule' },
-    { id: 'development', name: '客户开发', icon: '👥', href: '/dashboard/development' },
-    { id: 'pool', name: '客户池子', icon: '💼', href: '/dashboard/pool' },
+    // { id: 'development', name: '客户开发', icon: '👥', href: '/dashboard/development' },
+    // { id: 'pool', name: '客户池子', icon: '💼', href: '/dashboard/pool' },
   ];
 
   if (!user) {

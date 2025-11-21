@@ -2,6 +2,11 @@
 
 import { useState } from 'react';
 
+type StatusMessage = {
+  type: 'success' | 'error';
+  text: string;
+};
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
@@ -11,6 +16,8 @@ export default function ContactPage() {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<StatusMessage | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -20,17 +27,47 @@ export default function ContactPage() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert('感谢您的咨询，我们会在24小时内联系您！');
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      company: '',
-      subject: '',
-      message: ''
-    });
+    setStatusMessage(null);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data?.error || '提交失败，请稍后重试');
+      }
+
+      setStatusMessage({
+        type: 'success',
+        text: data?.message || '感谢您的咨询，我们会尽快与您联系！'
+      });
+
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        subject: '',
+        message: ''
+      });
+    } catch (error: any) {
+      setStatusMessage({
+        type: 'error',
+        text: error?.message || '提交失败，请稍后重试'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -66,6 +103,7 @@ export default function ContactPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
+                      required
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600"
                       placeholder="请输入您的邮箱"
                     />
@@ -132,10 +170,21 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition"
+                  disabled={isSubmitting}
+                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg transition"
                 >
-                  提交咨询
+                  {isSubmitting ? '提交中...' : '提交咨询'}
                 </button>
+
+                {statusMessage && (
+                  <p
+                    className={`text-sm text-center ${
+                      statusMessage.type === 'success' ? 'text-green-600' : 'text-red-600'
+                    }`}
+                  >
+                    {statusMessage.text}
+                  </p>
+                )}
               </form>
             </div>
           </div>

@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 
 // 简单的用户验证（生产环境应该从数据库查询）
 const USERS = [
-  { id: 1, username: 'admin', password: 'password', name: '管理员', role: 'admin' },
-  { id: 2, username: 'demo', password: 'demo123', name: '演示用户', role: 'user' },
+  { id: 1, username: 'novamax', password: 'cris1688', name: '管理员', role: 'admin' },
+  { id: 2, username: 'nova003', password: 'nova003nova', name: '普通用户', role: 'user' },
 ];
 
 export async function POST(req: Request) {
