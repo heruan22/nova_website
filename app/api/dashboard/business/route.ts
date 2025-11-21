@@ -64,7 +64,8 @@ export async function GET(req: Request) {
 
     try {
       // 获取本月订单统计
-      const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM
+      // Extract current month in YYYY-MM format for database queries
+      const currentMonth = new Date().toISOString().substring(0, 7); // YYYY-MM
       const [monthOrdersResult] = await connection.execute(
         'SELECT COUNT(*) as count FROM orders WHERE DATE_FORMAT(order_date, "%Y-%m") = ?',
         [currentMonth]
