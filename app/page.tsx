@@ -143,7 +143,7 @@ export default function Home() {
           {/* 底部区域 */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-1 md:gap-2 text-center md:text-left pb-1">
             <p className="text-gray-400 text-sm">
-              © 2019-2025 华顺物流有限公司 版权所有 | 赣ICP备2025054128号
+              © 2019-2025 华顺船务有限公司 版权所有 | 赣ICP备2025054128号
             </p>
             <div className="flex flex-wrap justify-center md:justify-end gap-4 text-sm text-gray-400">
               <a href="#" className="hover:text-white transition-colors">隐私政策</a>

@@ -5,7 +5,7 @@ export async function POST(req: Request) {
     const { name, email, phone, company, subject, message } = await req.json();
 
     // 验证必填字段
-    if (!name || !email || !phone || !message) {
+    if (!name || !phone || !message) {
       return Response.json(
         { success: false, error: '缺少必填信息' },
         { status: 400 }
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 新的在线咨询提交：
 
 姓名：${name}
-邮箱：${email}
+邮箱：${email || '未提供'}
 电话：${phone}
 公司：${company || '未提供'}
 主题：${subject || '未分类'}
@@ -51,7 +51,7 @@ ${message}
         <h2>新的在线咨询提交</h2>
         <table style="border-collapse: collapse; width: 100%;">
           <tr><td style="padding: 8px; border: 1px solid #ddd;"><strong>姓名：</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${name}</td></tr>
-          <tr><td style="padding: 8px; border: 1px solid #ddd;"><strong>邮箱：</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${email}</td></tr>
+          <tr><td style="padding: 8px; border: 1px solid #ddd;"><strong>邮箱：</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${email || '未提供'}</td></tr>
           <tr><td style="padding: 8px; border: 1px solid #ddd;"><strong>电话：</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${phone}</td></tr>
           <tr><td style="padding: 8px; border: 1px solid #ddd;"><strong>公司：</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${company || '未提供'}</td></tr>
           <tr><td style="padding: 8px; border: 1px solid #ddd;"><strong>主题：</strong></td><td style="padding: 8px; border: 1px solid #ddd;">${subject || '未分类'}</td></tr>

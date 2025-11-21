@@ -65,7 +65,7 @@ ${message}
 
     return Response.json({
       success: true,
-      message: '消息已发送，我们会尽快回复您。',
+      message: '感谢您的咨询，请提供您的联系方式，我们的客服将在工作时间内尽快联系您。您也可直接联系我们的业务人员：\n席经理 15900736092',
     });
   } catch (error: any) {
     console.error('Live chat error:', error);
