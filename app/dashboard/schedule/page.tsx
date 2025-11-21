@@ -87,7 +87,7 @@ export default function SchedulePage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">船期看板</h1>
-          <p className="text-gray-600 mt-1">实时船期信息与舱位管理</p>
+          {/* <p className="text-gray-600 mt-1">实时船期信息与舱位管理</p> */}
         </div>
         <div className="flex gap-3">
           <button className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">
@@ -102,10 +102,10 @@ export default function SchedulePage() {
       {/* 统计概览 */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {[
-          { label: '活跃航线', value: '24', icon: '🌐' },
-          { label: '本月航次', value: '86', icon: '🚢' },
-          { label: '揽货进度', value: '78%', icon: '📊' },
-          { label: '即将开航', value: '12', icon: '⏱️' },
+          { label: '本月航次', value: '3', icon: '🌐' },
+          { label: '本月货量', value: '114,000吨', icon: '🚢' },
+          { label: '揽货进度', value: '80%', icon: '📊' },
+          { label: '即将开航', value: '3', icon: '⏱️' },
         ].map((stat, i) => (
           <div key={i} className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
             <div className="flex items-center gap-3">

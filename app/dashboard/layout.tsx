@@ -13,6 +13,22 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     const token = localStorage.getItem('auth_token');
     const userInfo = localStorage.getItem('user_info');
 
+    // 开发模式下方便调试：自动注入一个假的管理员账户到 localStorage
+    // 这样可以立即访问驾驶舱页面而不需要手动登录
+    try {
+      const isDev = process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost';
+      if (isDev) {
+        const mockUser = { id: 1, name: '管理员', role: 'admin' };
+        const mockToken = btoa(`${mockUser.id}:${Date.now()}`);
+        localStorage.setItem('auth_token', mockToken);
+        localStorage.setItem('user_info', JSON.stringify(mockUser));
+        setUser(mockUser);
+        return;
+      }
+    } catch (e) {
+      // ignore
+    }
+
     if (!token || !userInfo) {
       router.push('/login');
       return;
@@ -30,6 +46,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const menuItems = [
     { id: 'business', name: '业务看板', icon: '📊', href: '/dashboard' },
     { id: 'schedule', name: '船期看板', icon: '🚢', href: '/dashboard/schedule' },
+    { id: 'test', name: '测试', icon: '🧪', href: '/dashboard/test' },
     // { id: 'development', name: '客户开发', icon: '👥', href: '/dashboard/development' },
     // { id: 'pool', name: '客户池子', icon: '💼', href: '/dashboard/pool' },
   ];
