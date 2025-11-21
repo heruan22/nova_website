@@ -1,6 +1,37 @@
 import { NextResponse } from 'next/server';
 import { getConnection } from '@/lib/db';
 
+// 数据库查询结果类型定义 / Database query result type definitions
+interface CountResult {
+  count: number;
+}
+
+interface RevenueResult {
+  total: number;
+}
+
+// 订单数据类型定义 / Order data type definition
+interface OrderRow {
+  id: string;
+  customer: string;
+  cargo: string;
+  volume: string;
+  status: string;
+  date: string;
+}
+
+// 统计数据类型定义 / Statistics data type definition
+interface StatItem {
+  label: string;
+  value: string;
+  change: string;
+  trend: string;
+  icon: string;
+}
+
+// 常量定义 / Constants
+const MILLION = 1000000;
+
 // Mock数据 - 当数据库不可用时使用
 const mockData = {
   stats: [
@@ -38,27 +69,27 @@ export async function GET(req: Request) {
         'SELECT COUNT(*) as count FROM orders WHERE DATE_FORMAT(order_date, "%Y-%m") = ?',
         [currentMonth]
       );
-      const monthOrders = (monthOrdersResult as any)[0]?.count || 0;
+      const monthOrders = (monthOrdersResult as CountResult[])[0]?.count || 0;
 
       // 获取运输中订单数
       const [shippingResult] = await connection.execute(
         'SELECT COUNT(*) as count FROM orders WHERE status = ?',
         ['运输中']
       );
-      const shippingOrders = (shippingResult as any)[0]?.count || 0;
+      const shippingOrders = (shippingResult as CountResult[])[0]?.count || 0;
 
       // 获取本月收入
       const [revenueResult] = await connection.execute(
         'SELECT COALESCE(SUM(total_amount), 0) as total FROM orders WHERE DATE_FORMAT(order_date, "%Y-%m") = ? AND status != ?',
         [currentMonth, '已取消']
       );
-      const revenue = (revenueResult as any)[0]?.total || 0;
+      const revenue = (revenueResult as RevenueResult[])[0]?.total || 0;
 
       // 获取客户总数
       const [customersResult] = await connection.execute(
         'SELECT COUNT(*) as count FROM customers'
       );
-      const totalCustomers = (customersResult as any)[0]?.count || 0;
+      const totalCustomers = (customersResult as CountResult[])[0]?.count || 0;
 
       // 获取最近订单
       const [ordersRows] = await connection.execute(
@@ -78,10 +109,10 @@ export async function GET(req: Request) {
         stats: [
           { label: '本月订单', value: monthOrders.toString(), change: '+12%', trend: 'up', icon: '📦' },
           { label: '运输中', value: shippingOrders.toString(), change: '+5%', trend: 'up', icon: '🚢' },
-          { label: '本月收入', value: `¥${(revenue / 1000000).toFixed(1)}M`, change: '+18%', trend: 'up', icon: '💰' },
+          { label: '本月收入', value: `¥${(revenue / MILLION).toFixed(1)}M`, change: '+18%', trend: 'up', icon: '💰' },
           { label: '客户总数', value: totalCustomers.toString(), change: '+8%', trend: 'up', icon: '👥' },
         ],
-        recentOrders: ordersRows,
+        recentOrders: ordersRows as OrderRow[],
       };
 
       return NextResponse.json(data);
