@@ -19,6 +19,18 @@ export async function POST(req: Request) {
       );
     }
 
+    // 检查是否配置了邮件服务
+    const smtpConfigured = process.env.SMTP_USER && process.env.SMTP_PASS;
+
+    if (!smtpConfigured) {
+      // 如果未配置邮件服务，仅记录日志并返回成功
+      console.log('Chat message received (SMTP not configured):', message);
+      return Response.json({
+        success: true,
+        message: '感谢您的咨询，请提供您的联系方式，我们的客服将在工作时间内尽快联系您。您也可直接联系我们的业务人员：\n席经理 15900736092',
+      });
+    }
+
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
       port: parseInt(process.env.SMTP_PORT || '587'),

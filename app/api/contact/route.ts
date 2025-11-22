@@ -12,6 +12,18 @@ export async function POST(req: Request) {
       );
     }
 
+    // 检查是否配置了邮件服务
+    const smtpConfigured = process.env.SMTP_USER && process.env.SMTP_PASS;
+
+    if (!smtpConfigured) {
+      // 如果未配置邮件服务，仅记录日志并返回成功
+      console.log('Contact form received (SMTP not configured):', { name, email, phone, company, subject, message });
+      return Response.json({
+        success: true,
+        message: '咨询已提交，我们会尽快与您联系',
+      });
+    }
+
     // 配置邮件发送器（根据环境变量）
     // 使用 Gmail 或其他 SMTP 服务
     const transporter = nodemailer.createTransport({
