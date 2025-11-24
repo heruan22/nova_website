@@ -158,7 +158,7 @@ export default function ProfitCalculator() {
   // 导出报告
   const exportReport = () => {
     const reportContent = `
-杂货船利润计算报告
+租船计算报告
 生成时间: ${new Date().toLocaleString('zh-CN')}
 
 === 港口信息 ===
@@ -175,7 +175,7 @@ export default function ProfitCalculator() {
 燃油价格: $${costParams.fuelPrice.toLocaleString()}/吨
 
 === 货物信息 ===
-${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} → ${c.unloadingPort} | ${c.weight}吨 @ $${c.price}/吨`).join('\n')}
+${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} → ${c.unloadingPort} | ${c.weight}计费吨 @ $${c.price}/计费吨`).join('\n')}
 
 === 计算结果 ===
 总运费: $${result.totalRevenue.toLocaleString()}
@@ -203,8 +203,8 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
       <div className="max-w-7xl mx-auto">
         {/* 标题栏 */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">杂货船利润计算器</h1>
-          <p className="text-gray-600">多港口、多票货物航运利润精准计算工具</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">租船计算器</h1>
+          <p className="text-gray-600">多港口航运租船精准计算工具</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -282,7 +282,7 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
               <h2 className="text-xl font-semibold text-gray-900 mb-4">成本参数</h2>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">港使费（元）</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">港使费（美元）</label>
                   <input
                     type="number"
                     value={costParams.portFees || ''}
@@ -291,7 +291,7 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">日租金（元/天）</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">日租金（美元/天）</label>
                   <input
                     type="number"
                     value={costParams.dailyRent || ''}
@@ -424,7 +424,7 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
 
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">计费吨（吨）</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">计费吨</label>
                         <input
                           type="number"
                           value={cargo.weight || ''}
@@ -433,7 +433,7 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">单价（美元/吨）</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">单价（美元/计费吨）</label>
                         <input
                           type="number"
                           value={cargo.price || ''}
