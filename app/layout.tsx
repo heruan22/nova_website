@@ -3,6 +3,7 @@ import './globals.css';
 import { ContactProvider } from '@/components/ContactContext';
 import ContactModal from '@/components/ContactModal';
 import LiveChat from '@/components/LiveChat';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   title: '华顺船务，全球散杂货运输专家',
@@ -22,6 +23,7 @@ export default function RootLayout({
           <ContactModal />
           <LiveChat />
         </ContactProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
