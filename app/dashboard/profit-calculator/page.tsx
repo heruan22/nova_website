@@ -25,6 +25,7 @@ interface CostParams {
   sailingFuelConsumption: number;
   anchorageFuelConsumption: number;
   fuelPrice: number;
+  otherCosts: number;
 }
 
 interface CalculationResult {
@@ -32,6 +33,7 @@ interface CalculationResult {
   portFees: number;
   rentCost: number;
   fuelCost: number;
+  otherCosts: number;
   totalCost: number;
   profit: number;
   profitRate: number;
@@ -53,6 +55,7 @@ export default function ProfitCalculator() {
     sailingFuelConsumption: 0,
     anchorageFuelConsumption: 0,
     fuelPrice: 0,
+    otherCosts: 0,
   });
 
   // 从 localStorage 加载数据
@@ -117,7 +120,7 @@ export default function ProfitCalculator() {
       (costParams.sailingFuelConsumption * costParams.sailingDays +
         costParams.anchorageFuelConsumption * costParams.anchorageDays) *
       costParams.fuelPrice;
-    const totalCost = costParams.portFees + rentCost + fuelCost;
+    const totalCost = costParams.portFees + rentCost + fuelCost + costParams.otherCosts;
     const profit = totalRevenue - totalCost;
     const profitRate = totalRevenue > 0 ? (profit / totalRevenue) * 100 : 0;
 
@@ -126,6 +129,7 @@ export default function ProfitCalculator() {
       portFees: costParams.portFees,
       rentCost,
       fuelCost,
+      otherCosts: costParams.otherCosts,
       totalCost,
       profit,
       profitRate,
@@ -150,6 +154,7 @@ export default function ProfitCalculator() {
         sailingFuelConsumption: 0,
         anchorageFuelConsumption: 0,
         fuelPrice: 0,
+        otherCosts: 0,
       });
       localStorage.removeItem('shipProfitCalculator');
     }
@@ -173,6 +178,7 @@ export default function ProfitCalculator() {
 航行油耗: ${costParams.sailingFuelConsumption} 吨/天
 锚泊油耗: ${costParams.anchorageFuelConsumption} 吨/天
 燃油价格: $${costParams.fuelPrice.toLocaleString()}/吨
+其他费用: $${result.otherCosts.toLocaleString()}
 
 === 货物信息 ===
 ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} → ${c.unloadingPort} | ${c.weight}计费吨 @ $${c.price}/计费吨`).join('\n')}
@@ -181,6 +187,7 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
 总运费: $${result.totalRevenue.toLocaleString()}
 租金成本: $${result.rentCost.toLocaleString()}
 燃油成本: $${result.fuelCost.toLocaleString()}
+其他费用: $${result.otherCosts.toLocaleString()}
 总成本: $${result.totalCost.toLocaleString()}
 总利润: $${result.profit.toLocaleString()}
 利润率: ${result.profitRate.toFixed(2)}%
@@ -346,6 +353,15 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">其他（美元）</label>
+                  <input
+                    type="number"
+                    value={costParams.otherCosts || ''}
+                    onChange={e => setCostParams({ ...costParams, otherCosts: Number(e.target.value) })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -482,7 +498,7 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
 
           <div className="border-t pt-4">
             <h3 className="font-semibold text-gray-900 mb-3">成本明细</h3>
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div>
                 <div className="text-sm text-gray-600">港使费</div>
                 <div className="text-lg font-semibold text-gray-900">${result.portFees.toLocaleString()}</div>
@@ -494,6 +510,10 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
               <div>
                 <div className="text-sm text-gray-600">燃油成本</div>
                 <div className="text-lg font-semibold text-gray-900">${result.fuelCost.toLocaleString()}</div>
+              </div>
+              <div>
+                <div className="text-sm text-gray-600">其他费用</div>
+                <div className="text-lg font-semibold text-gray-900">${result.otherCosts.toLocaleString()}</div>
               </div>
             </div>
           </div>
