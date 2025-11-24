@@ -166,23 +166,23 @@ export default function ProfitCalculator() {
 卸货港: ${ports.filter(p => p.type === 'unloading').map(p => p.name).join(', ')}
 
 === 成本参数 ===
-港使费: ¥${result.portFees.toLocaleString()}
-日租金: ¥${costParams.dailyRent.toLocaleString()}
+港使费: $${result.portFees.toLocaleString()}
+日租金: $${costParams.dailyRent.toLocaleString()}
 航行天数: ${costParams.sailingDays} 天
 锚泊天数: ${costParams.anchorageDays} 天
 航行油耗: ${costParams.sailingFuelConsumption} 吨/天
 锚泊油耗: ${costParams.anchorageFuelConsumption} 吨/天
-燃油价格: ¥${costParams.fuelPrice.toLocaleString()}/吨
+燃油价格: $${costParams.fuelPrice.toLocaleString()}/吨
 
 === 货物信息 ===
-${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} → ${c.unloadingPort} | ${c.weight}吨 @ ¥${c.price}/吨`).join('\n')}
+${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} → ${c.unloadingPort} | ${c.weight}吨 @ $${c.price}/吨`).join('\n')}
 
 === 计算结果 ===
-总运费: ¥${result.totalRevenue.toLocaleString()}
-租金成本: ¥${result.rentCost.toLocaleString()}
-燃油成本: ¥${result.fuelCost.toLocaleString()}
-总成本: ¥${result.totalCost.toLocaleString()}
-总利润: ¥${result.profit.toLocaleString()}
+总运费: $${result.totalRevenue.toLocaleString()}
+租金成本: $${result.rentCost.toLocaleString()}
+燃油成本: $${result.fuelCost.toLocaleString()}
+总成本: $${result.totalCost.toLocaleString()}
+总利润: $${result.profit.toLocaleString()}
 利润率: ${result.profitRate.toFixed(2)}%
     `.trim();
 
@@ -337,8 +337,8 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
-                <div className="col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">燃油价格（元/吨）</label>
+              <div className="col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">燃油价格（美元/吨）</label>
                   <input
                     type="number"
                     value={costParams.fuelPrice || ''}
@@ -433,7 +433,7 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">单价（元/吨）</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">单价（美元/吨）</label>
                         <input
                           type="number"
                           value={cargo.price || ''}
@@ -444,7 +444,7 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
                     </div>
 
                     <div className="text-sm text-gray-600 bg-gray-50 p-2 rounded">
-                      小计运费: ¥{(cargo.weight * cargo.price).toLocaleString()}
+                      小计运费: ${(cargo.weight * cargo.price).toLocaleString()}
                     </div>
                   </div>
                 </div>
@@ -460,16 +460,16 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <div className="bg-blue-50 p-4 rounded-lg">
               <div className="text-sm text-blue-600 mb-1">总运费</div>
-              <div className="text-2xl font-bold text-blue-900">¥{result.totalRevenue.toLocaleString()}</div>
+              <div className="text-2xl font-bold text-blue-900">${result.totalRevenue.toLocaleString()}</div>
             </div>
             <div className="bg-orange-50 p-4 rounded-lg">
               <div className="text-sm text-orange-600 mb-1">总成本</div>
-              <div className="text-2xl font-bold text-orange-900">¥{result.totalCost.toLocaleString()}</div>
+              <div className="text-2xl font-bold text-orange-900">${result.totalCost.toLocaleString()}</div>
             </div>
             <div className={`p-4 rounded-lg ${result.profit >= 0 ? 'bg-green-50' : 'bg-red-50'}`}>
               <div className={`text-sm mb-1 ${result.profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>总利润</div>
               <div className={`text-2xl font-bold ${result.profit >= 0 ? 'text-green-900' : 'text-red-900'}`}>
-                ¥{result.profit.toLocaleString()}
+                ${result.profit.toLocaleString()}
               </div>
             </div>
             <div className={`p-4 rounded-lg ${result.profitRate >= 0 ? 'bg-green-50' : 'bg-red-50'}`}>
@@ -485,15 +485,15 @@ ${cargos.map((c, i) => `${i + 1}. ${c.name || '未命名'} | ${c.loadingPort} �
             <div className="grid grid-cols-3 gap-4">
               <div>
                 <div className="text-sm text-gray-600">港使费</div>
-                <div className="text-lg font-semibold text-gray-900">¥{result.portFees.toLocaleString()}</div>
+                <div className="text-lg font-semibold text-gray-900">${result.portFees.toLocaleString()}</div>
               </div>
               <div>
                 <div className="text-sm text-gray-600">租金成本</div>
-                <div className="text-lg font-semibold text-gray-900">¥{result.rentCost.toLocaleString()}</div>
+                <div className="text-lg font-semibold text-gray-900">${result.rentCost.toLocaleString()}</div>
               </div>
               <div>
                 <div className="text-sm text-gray-600">燃油成本</div>
-                <div className="text-lg font-semibold text-gray-900">¥{result.fuelCost.toLocaleString()}</div>
+                <div className="text-lg font-semibold text-gray-900">${result.fuelCost.toLocaleString()}</div>
               </div>
             </div>
           </div>
