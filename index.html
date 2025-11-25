@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Website - Git Log</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .log-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .log-entry {
+            border-left: 4px solid #667eea;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .log-entry:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .commit-hash {
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .commit-author {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .commit-date {
+            color: #999;
+            font-size: 0.85em;
+        }
+
+        .commit-message {
+            margin-top: 10px;
+            font-size: 1.1em;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .no-commits {
+            text-align: center;
+            color: #666;
+            padding: 40px;
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px 20px;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌟 Nova Website</h1>
+            <p class="subtitle">Git Repository History</p>
+        </header>
+
+        <div class="log-container">
+            <h2 style="margin-bottom: 20px; color: #333;">Recent Commits</h2>
+            <div id="git-log">
+                <div class="log-entry">
+                    <div class="commit-hash">327088d</div>
+                    <div class="commit-author">Author: heruan22</div>
+                    <div class="commit-date">Date: Mon Nov 17 20:08:51 2025 +0800</div>
+                    <div class="commit-message">Initial commit</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Nova Website. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
