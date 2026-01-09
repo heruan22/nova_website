@@ -127,6 +127,33 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: bool
                 {item.name}
               </a>
             ))}
+            {/* Mobile Actions */}
+            <div className="space-y-2 px-3 pt-4 pb-2 border-t border-gray-200 dark:border-gray-700">
+              <a
+                href="/login"
+                className={`block w-full text-center px-4 py-2.5 rounded-lg font-medium transition ${
+                  hasScrolled
+                    ? 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50'
+                    : 'border-2 border-white text-white hover:bg-blue-800'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                登录
+              </a>
+              <button
+                onClick={() => {
+                  openChat();
+                  setIsMenuOpen(false);
+                }}
+                className={`block w-full px-4 py-2.5 rounded-lg font-medium transition ${
+                  hasScrolled
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
+                    : 'bg-white text-blue-600 hover:bg-gray-100'
+                }`}
+              >
+                联系我们
+              </button>
+            </div>
           </div>
         </div>
       )}

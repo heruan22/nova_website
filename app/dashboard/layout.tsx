@@ -45,11 +45,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   const menuItems = [
     { id: 'business', name: '业务看板', icon: '📊', href: '/dashboard' },
-    { id: 'schedule', name: '船期看板', icon: '🚢', href: '/dashboard/schedule' },
-    { id: 'profit-calculator', name: '利润计算器', icon: '💰', href: '/dashboard/profit-calculator' },
-    { id: 'test', name: '测试', icon: '🧪', href: '/dashboard/test' },
-    // { id: 'development', name: '客户开发', icon: '👥', href: '/dashboard/development' },
-    // { id: 'pool', name: '客户池子', icon: '💼', href: '/dashboard/pool' },
+    { id: 'container-tracking', name: '货柜追踪', icon: '📦', href: '/dashboard/container-tracking' },
+    { id: 'quotations', name: '报价管理', icon: '💵', href: '/dashboard/quotations' },
+    { id: 'customers', name: '客户管理', icon: '👥', href: '/dashboard/customers' },
+    { id: 'analytics', name: '数据分析', icon: '📈', href: '/dashboard/analytics' },
+    { id: 'schedule-table', name: '船期表', icon: '📋', href: '/dashboard/schedule-table' },
+    { id: 'knowledge-nav', name: '知识导航', icon: '🧭', href: '/dashboard/knowledge-nav' },
+    // { id: 'schedule', name: '船期看板', icon: '🚢', href: '/dashboard/schedule' },
+    // { id: 'profit-calculator', name: '利润计算器', icon: '💰', href: '/dashboard/profit-calculator' },
   ];
 
   if (!user) {
@@ -100,37 +103,37 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="flex">
         {/* 侧边栏 */}
         <aside className="hidden md:flex md:flex-col w-64 bg-white border-r border-gray-200 min-h-[calc(100vh-4rem)]">
-          <nav className="flex-1 p-4 space-y-2">
+          <nav className="flex-1 p-4 space-y-1">
             {menuItems.map((item) => (
               <a
                 key={item.id}
                 href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
                   currentPage === item.id
-                    ? 'bg-blue-50 text-blue-700 font-semibold'
-                    : 'text-gray-700 hover:bg-gray-50'
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold shadow-lg transform scale-105'
+                    : 'text-gray-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-700 font-medium'
                 }`}
                 onClick={() => setCurrentPage(item.id)}
               >
                 <span className="text-xl">{item.icon}</span>
-                <span>{item.name}</span>
+                <span className="text-sm">{item.name}</span>
               </a>
             ))}
           </nav>
 
-          <div className="p-4 border-t border-gray-200">
+          <div className="p-4 border-t border-gray-200 bg-gradient-to-br from-gray-50 to-blue-50">
             <a
               href="/"
-              className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition"
+              className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:text-blue-700 hover:bg-white rounded-xl transition-all font-medium"
             >
-              <span>🏠</span>
+              <span className="text-lg">🏠</span>
               <span>返回首页</span>
             </a>
           </div>
         </aside>
 
         {/* 主内容区 */}
-        <main className="flex-1 p-6">
+        <main className="flex-1 bg-gradient-to-br from-gray-50 to-blue-50/30 p-6 overflow-auto">
           {children}
         </main>
       </div>

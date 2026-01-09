@@ -42,7 +42,7 @@ export default function SchedulePage() {
       voyage: 'OP2025-08',
       portFrom: '天津港',
       portTo: '杰贝阿里',
-      etd: '2025-12-10',
+      etd: '2026-01-15',
       eta: '2026-01-15',
       capacity: 55000,
       booked: 35000,
