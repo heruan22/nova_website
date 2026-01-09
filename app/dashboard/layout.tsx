@@ -9,32 +9,40 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [currentPage, setCurrentPage] = useState('business');
 
   useEffect(() => {
-    // 检查登录状态
-    const token = localStorage.getItem('auth_token');
-    const userInfo = localStorage.getItem('user_info');
-
-    // 开发模式下方便调试：自动注入一个假的管理员账户到 localStorage
-    // 这样可以立即访问驾驶舱页面而不需要手动登录
-    try {
-      const isDev = process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost';
+    // 开发模式下自动登录,方便调试
+    if (typeof window !== 'undefined') {
+      const isDev = window.location.hostname === 'localhost' || 
+                    window.location.hostname === '127.0.0.1' ||
+                    window.location.hostname.includes('gitpod') ||
+                    window.location.hostname.includes('codespaces') ||
+                    window.location.hostname.includes('github.dev');
+      
       if (isDev) {
+        // 自动注入管理员账户
         const mockUser = { id: 1, name: '管理员', role: 'admin' };
         const mockToken = btoa(`${mockUser.id}:${Date.now()}`);
+        
         localStorage.setItem('auth_token', mockToken);
         localStorage.setItem('user_info', JSON.stringify(mockUser));
         setUser(mockUser);
         return;
       }
-    } catch (e) {
-      // ignore
-    }
 
-    if (!token || !userInfo) {
-      router.push('/login');
-      return;
-    }
+      // 生产环境检查登录状态
+      const token = localStorage.getItem('auth_token');
+      const userInfo = localStorage.getItem('user_info');
 
-    setUser(JSON.parse(userInfo));
+      if (!token || !userInfo) {
+        router.push('/login');
+        return;
+      }
+
+      try {
+        setUser(JSON.parse(userInfo));
+      } catch (e) {
+        router.push('/login');
+      }
+    }
   }, [router]);
 
   const handleLogout = () => {
